@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link href="CSS/styles.css">
+</head>
+
+<body style="background-color : aliceblue;" class="container" style="position: relative" onload="bodyLoad()">
+    <div id='loginDiv'>
+        <form id='loginForm' name='loginForm'>
+            <h3>Login name</h3>
+            <input id='name' type="text" name="username"> </br></br>
+            <h3>password</h3>
+            <input id='pass' type="password" name="password"></br></br>
+            <button type="button" onclick="ValidateUserUsingPost()">Submit</button>
+            <button onclick="ValidateUser()">Validate user</button>
+        </form>
+    </div>
+
+    <div id='QuizDiv' style="display: none;">
+        <h2>Quiz</h2>
+        <div id='ExamModes' align='center'>
+            <input type="radio" name='modes' id="ExamMode" checked='true'
+                onclick="TestService.setTestMode(1);bodyLoad()"><span>Exam Mode</span> &nbsp;
+            <input type="radio" name='modes' id="ReviewMode"
+                onclick="TestService.setTestMode(2);bodyLoad()"><span>Review
+                Mode</span>
+        </div>
+
+        <h4>Choose the Sections and continue:</h4>
+        <div id="sectionDiv"
+            style="background-color: darkkhaki ; border: 1px solid black; margin: 5px; display: flex; justify-content: space-evenly;">
+        </div>
+
+        <div id="container" style="display: inline-block;" class="container innercontainer">
+        </div>
+        <input type="button" id="Prev_img" class="btn btn-warning navbar-btn  buttonR" value="Prev"
+            onclick="myFunctionMinus()">
+        <input type="button" id="Next_img" class="btn btn-warning navbar-btn  buttonR" value="Next"
+            onclick="myFunctionPlus()">
+        <input type="button" value="Add bookmark" id='btnBookmark' class="btn btn-danger" onclick="AddBookmark()">
+        <input type="button" value="Remove bookmark" id='btnRemoveBookmark' class="btn btn-warning"
+            onclick="removeBookmark()">
+
+        <div id="BookmarkBtns">
+        </div>
+        <div id='QuestionNav' style="display: block; position: absolute ; bottom: 0px;">
+        </div>
+    </div>
+
+</body>
+<script>
+    function ValidateUser() {
+        var un = document.getElementById('name').value;
+        var ps = document.getElementById('pass').value;
+        var QuizDiv = document.getElementById('QuizDiv');
+        var loginDiv = document.getElementById('loginDiv');
+
+        var requestObj = new XMLHttpRequest();
+        var querystr = '/LoginService?username=' + un + '&password=' + ps;
+        requestObj.open("GET", querystr, false);
+
+        requestObj.onreadystatechange = function () { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Request finished. Do processing here.
+                var response = requestObj.responseText;
+                if (response == 'found') {
+                    QuizDiv.style.display = 'block';
+                    loginDiv.style.display = 'none';
+                }
+            }
+        }
+        requestObj.send(querystr);      
+
+    }
+
+    function ValidateUserUsingPost() {
+        
+        var QuizDiv = document.getElementById('QuizDiv');
+        var loginDiv = document.getElementById('loginDiv');
+        var loginForm = document.getElementById('loginForm');
+        var formData = new FormData(loginForm);
+        var requestObj = new XMLHttpRequest();
+        requestObj.open("POST", '/LoginServicePost', false);
+        requestObj.send(formData);
+
+        var response = requestObj.responseText;
+        if (response == 'found') {
+            QuizDiv.style.display = 'block';
+            loginDiv.style.display = 'none';
+        }
+    }
+
+</script>
+<script src="QuestionService"></script>
+<script src="StudentResponseService"></script>
+<script src="TestService"></script>
+<script src="LoadQuiz"></script>
+<script src="BookmarkService"></script>
+
+</html>

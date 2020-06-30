@@ -1,0 +1,198 @@
+[
+    {
+        
+        "Question": "Which of the following are true about the structures in C#",
+        "Option1": "Structures can have methods, fields, indexers, properties, operator methods, and events",
+        "Option2": "Structures can have defined constructors, but not destructors. However, you cannot define a default constructor for a structure. The default constructor is automatically defined and cannot be changed.",
+        "Option3": "Unlike classes, structures cannot inherit other structures or classes.",
+        "Option4": "Structures cannot be used as a base for other structures or classes.",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "DS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "A ______ is defined as the execution path of a program",
+        "Option1": "Class",
+        "Option2": "Object",
+        "Option3": "Properties",
+        "Option4": "Thread",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "A ____ is a collection of data stored in a disk with a specific name and a directory path",
+        "Option1": "Lists",
+        "Option2": "File",
+        "Option3": "Directory",
+        "Option4": "FileList",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "DS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "What is MSIL?",
+        "Option1": "Multi Socket Interface Library",
+        "Option2": "Microsoft Interface Language",
+        "Option3": "Microsoft Integer Long",
+        "Option4": "Microsoft Intermediate Language",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+
+    },
+    {
+        
+        "Question": "Strings are ___________ types",
+        "Option1": "Value",
+        "Option2": "Depends",
+        "Option3": "Can't say",
+        "Option4": "Reference",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "All dynamic memory requirements of an application are fulfilled from the _______ memory",
+        "Option1": "Global",
+        "Option2": "Stack",
+        "Option3": "Heap ",
+        "Option4": "None",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "What is specified using class declaration?",
+        "Option1": "type",
+        "Option2": "scope",
+        "Option3": "type & scope ",
+        "Option4": "None of mentioned",
+        "CorrectAnswer": 3,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "The capability of an object in C# to take number of different forms and hence display behavior as according is known as:",
+        "Option1": "Encapsulation",
+        "Option2": "Polymorphism",
+        "Option3": "Abstraction ",
+        "Option4": "None of the mentioned",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "DS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "String is created on the",
+        "Option1": "stack",
+        "Option2": "A String is a primitive",
+        "Option3": "heap ",
+        "Option4": "Both stack and heap",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "CSharp",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "Which of the following are reuse mechanisms available in C#.NET?",
+        "Option1": "Inheritance and Containership",
+        "Option2": "Encapsulation and Polymorphism",
+        "Option3": "Templates and Inheritance",
+        "Option4": "Inheritance and Encapsulation",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "DS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "What is the Java Script?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a Script",
+        "Option3": "Is a Program",
+        "Option4": "None of the above",
+        "CorrectAnswer": 1,
+        "Score": 1,
+        "Section": "JS",
+        "MQIndex":0
+    },
+
+    {
+        
+        "Question": "What is the C# ?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a programming language",
+        "Option3": "Is a Program",
+        "Option4": "None of the above",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "JS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "What is the C ?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a Script",
+        "Option3": "Is a Program",
+        "Option4": "None of the above",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "JS",
+        "MQIndex":0
+    },
+
+    {
+        
+        "Question": "What is the C++ ?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a Script",
+        "Option3": "Is a Program",
+        "Option4": "None of the above",
+        "CorrectAnswer": 4,
+        "Score": 1,
+        "Section": "DS",
+        "MQIndex":0
+    },
+
+    {
+        
+        "Question": "What is the MVC ?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a Model View Controller.",
+        "Option3": "Is a Microft Village of Controls",
+        "Option4": "None of the above",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "JS",
+        "MQIndex":0
+    },
+    {
+        
+        "Question": "What is the HTML ?",
+        "Option1": "Is a langauage",
+        "Option2": "Is a hyperText Markup Language.",
+        "Option3": "Is a junk",
+        "Option4": "None of the above",
+        "CorrectAnswer": 2,
+        "Score": 1,
+        "Section": "HTML",
+        "MQIndex":0
+    }
+]

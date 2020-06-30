@@ -4,14 +4,15 @@ var multer = require('multer');
 var upload = multer();
 var url = require('url');
 var fs = require("fs");
+var path = require('path');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: true })
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var app = express();
 
 app.use(bodyParser.json()); 
 
 app.use(upload.array());
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(path.join(__dirname, '/')));
 
 
 app.get('/Login', function (req, res) {
@@ -86,31 +87,31 @@ app.get('/QuizScreen', function (req, res) {
 })
 
 app.get('/QuestionService', function (req, res) {
-    fs.readFile(__dirname + "/" + "QuestionService.js", 'utf8', function (err, data) {
+    fs.readFile(__dirname + "/JS/" + "QuestionService.js", 'utf8', function (err, data) {
         res.end(data);
     });
 })
 
 app.get('/StudentResponseService', function (req, res) {
-    fs.readFile(__dirname + "/" + "StudentResponseService.js", 'utf8', function (err, data) {
+    fs.readFile(__dirname + "/JS/" + "StudentResponseService.js", 'utf8', function (err, data) {
         res.end(data);
     });
 })
 
 app.get('/TestService', function (req, res) {
-    fs.readFile(__dirname + "/" + "TestService.js", 'utf8', function (err, data) {
+    fs.readFile(__dirname + "/JS/" + "TestService.js", 'utf8', function (err, data) {
         res.end(data);
     });
 })
 
 app.get('/BookmarkService', function (req, res) {
-    fs.readFile(__dirname + "/" + "BookmarkService.js", 'utf8', function (err, data) {
+    fs.readFile(__dirname + "/JS/" + "BookmarkService.js", 'utf8', function (err, data) {
         res.end(data);
     });
 })
 
 app.get('/LoadQuiz', function (req, res) {
-    fs.readFile(__dirname + "/" + "LoadQuiz.js", 'utf8', function (err, data) {
+    fs.readFile(__dirname + "/JS/" + "LoadQuiz.js", 'utf8', function (err, data) {
         res.end(data);
     });
 })

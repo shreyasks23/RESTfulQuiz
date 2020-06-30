@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
-    <link href="CSS/styles.css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 
 <body style="background-color : aliceblue;" class="container" style="position: relative" onload="bodyLoad()">
@@ -74,17 +74,13 @@
         var querystr = '/LoginService?username=' + un + '&password=' + ps;
         requestObj.open("GET", querystr, false);
 
-        requestObj.onreadystatechange = function () { // Call a function when the state changes.
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // Request finished. Do processing here.
-                var response = requestObj.responseText;
+        
+        requestObj.send(querystr);      
+        var response = requestObj.responseText;
                 if (response == 'found') {
                     QuizDiv.style.display = 'block';
                     loginDiv.style.display = 'none';
                 }
-            }
-        }
-        requestObj.send(querystr);      
 
     }
 

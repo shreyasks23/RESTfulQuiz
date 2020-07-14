@@ -1,7 +1,6 @@
 var express = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\express');
 var bodyParser = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\body-parser');
-var multer = require('multer');
-var upload = multer();
+
 var url = require('url');
 var fs = require("fs");
 var path = require('path');
@@ -9,9 +8,8 @@ var path = require('path');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var app = express();
 
-app.use(bodyParser.json()); 
+var jsonParser = bodyParser.json();
 
-app.use(upload.array());
 app.use(express.static(path.join(__dirname, '/')));
 
 
@@ -22,7 +20,7 @@ app.get('/Login', function (req, res) {
 })
 
 
-app.post('/LoginServicePost', urlencodedParser , function (req, res) {
+app.post('/LoginServicePost', jsonParser , function (req, res) {
     // Prepare output in JSON format  
     
         var username =  req.body.username;

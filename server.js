@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 var express = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\express');
 var bodyParser = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\body-parser');
 
-=======
-var express = require('C:\\Users\\Shreyas\\AppData\\Roaming\\npm\\node_modules\\express');
-var bodyParser = require('C:\\Users\\Shreyas\\AppData\\Roaming\\npm\\node_modules\\body-parser');
-var multer = require('multer');
-var upload = multer();
->>>>>>> 95183e91fb66ac51fcec5afd75b43c94d445633a
+
 var url = require('url');
 var fs = require("fs");
 var path = require('path');

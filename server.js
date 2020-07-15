@@ -1,24 +1,23 @@
-var express = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\express');
-var bodyParser = require('C:\\Users\\shreyas.ks\\AppData\\Roaming\\npm\\node_modules\\body-parser');
-
-
-var url = require('url');
+var express = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\express');
+var bodyParser = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\body-parser');
 var fs = require("fs");
 var path = require('path');
+var services = require("./services.js");
+var resources = require("./resources.js");
+var multer = require('multer');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var upload = multer({ dest: './uploads/' })
+
+
 var app = express();
 
 var jsonParser = bodyParser.json();
 
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, '/')));
+app.use('/services' , services);
+app.use('/resources', resources);
 
-
-app.get('/Login', function (req, res) {
-    fs.readFile(__dirname + "/" + "Login.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
 
 app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in JSON format  
 
@@ -46,7 +45,7 @@ app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in J
             fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
                 if (err) throw err;
                 console.log('created!');
-                res.end("0");
+                res.send('<script>window.location.href="/QuizScreen";</script>');
             });
             
         }
@@ -83,6 +82,26 @@ app.post('/LoginServicePost', jsonParser, function (req, res) {
 
 })
 
+app.get('/listUsers', function (req, res) {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+app.get('/QuizScreen', function (req, res) {
+    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+app.get('/Register', function (req, res) {
+    fs.readFile(__dirname + "/" + "Registration.html", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+//#region deprecated methods
+//deprecated
 app.get('/LoginService', function (req, res) {
 
     var un = req.query.username;
@@ -108,54 +127,7 @@ app.get('/LoginService', function (req, res) {
     });
 })
 
-app.get('/listUsers', function (req, res) {
-    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/QuizScreen', function (req, res) {
-    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/QuestionService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "QuestionService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/StudentResponseService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "StudentResponseService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/TestService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "TestService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/BookmarkService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "BookmarkService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/LoadQuiz', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "LoadQuiz.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/MasterQuestions.txt', function (req, res) {
-    fs.readFile(__dirname + "/" + "MasterQuestions.txt", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
+//#endregion
 
 var server = app.listen(8081, function () {
     var host = server.address().address;    

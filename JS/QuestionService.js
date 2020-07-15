@@ -7,7 +7,7 @@ var QuestionService = (function () {
     MasterQuestion = [];
     var requestObj = new XMLHttpRequest();
 
-    requestObj.open("GET", "MasterQuestions.txt", false);
+    requestObj.open("GET", "resources/MasterQuestions", false);
     requestObj.send();
     MasterQuestion = JSON.parse(requestObj.responseText);
     for (i = 0; i < MasterQuestion.length; i++) {

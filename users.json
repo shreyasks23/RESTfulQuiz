@@ -1,1 +1,30 @@
-[{"name":"mahesh","password":"password1"},{"name":"suresh","password":"password2"},{"name":"ramesh","password":"password3"},{"name":"shreyas","password":"shreyas"},{"name":"d1","password":"d1"},{"name":"d2","password":"d2"},{"name":"d3","password":"d3"}]
+[
+    {
+        "name": "mahesh",
+        "password": "password1"
+    },
+    {
+        "name": "suresh",
+        "password": "password2"
+    },
+    {
+        "name": "ramesh",
+        "password": "password3"
+    },
+    {
+        "name": "shreyas",
+        "password": "shreyas"
+    },
+    {
+        "name": "d1",
+        "password": "d1"
+    },
+    {
+        "name": "d2",
+        "password": "d2"
+    },
+    {
+        "name": "d3",
+        "password": "d3"
+    }
+]

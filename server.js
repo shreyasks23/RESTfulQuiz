@@ -20,15 +20,50 @@ app.get('/Login', function (req, res) {
     });
 })
 
+app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in JSON format  
 
-app.post('/LoginServicePost', jsonParser , function (req, res) {
-    // Prepare output in JSON format  
-    
-        var username =  req.body.username;
-        var password =  req.body.password;         
+    var username = req.body.username;
+    var password = req.body.password;
+
+    var obj = { "name": username, "password": password };
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-        var Users = JSON.parse(data);    
+        var Users = [];
+        Users = JSON.parse(data);
+        var UserFound = false;
+        Users.forEach(element => {
+            if (element.name == username) {
+                UserFound = true;
+            }
+        });
+        if (UserFound) {
+            console.log("user found");
+            res.end("1");
+        }
+        else {
+            Users.push(obj);
+            var jsonString = JSON.stringify(Users);
+            fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
+                if (err) throw err;
+                console.log('created!');
+                res.end("0");
+            });
+            
+        }
+    });
+
+})
+
+
+app.post('/LoginServicePost', jsonParser, function (req, res) {
+    // Prepare output in JSON format  
+
+    var username = req.body.username;
+    var password = req.body.password;
+
+
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
+        var Users = JSON.parse(data);
         var UserFound = false;
         Users.forEach(element => {
             if (element.name == username && element.password == password) {
@@ -44,8 +79,8 @@ app.post('/LoginServicePost', jsonParser , function (req, res) {
             console.log("user not found");
             res.end("notfound");
         }
-    });  
-    
+    });
+
 })
 
 app.get('/LoginService', function (req, res) {
@@ -63,7 +98,7 @@ app.get('/LoginService', function (req, res) {
         if (UserFound) {
             console.log("user found");
             res.end("found");
-            
+
         }
         else {
             console.log("user not found");
@@ -123,7 +158,7 @@ app.get('/MasterQuestions.txt', function (req, res) {
 
 
 var server = app.listen(8081, function () {
-    var host = server.address().address
-    var port = server.address().port
-    console.log("Example app listening at http://%s:%s", host, port)
+    var host = server.address().address;    
+    var port = server.address().port;    
+    console.log("Example app listening at http://%s:%s", host, port);
 })

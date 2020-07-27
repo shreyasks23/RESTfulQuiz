@@ -71,12 +71,9 @@ app.post('/AddUser', jsonParser, type, function (req, res) {    // Prepare outpu
                 console.log('created!');
                 res.end("0");
             });
-
         }
     });
-
 })
-
 
 app.post('/LoginServicePost', jsonParser, function (req, res) {
     // Prepare output in JSON format  

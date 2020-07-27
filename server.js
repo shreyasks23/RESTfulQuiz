@@ -6,24 +6,37 @@ var services = require("./services.js");
 var resources = require("./resources.js");
 var multer = require('multer');
 
-var upload = multer({ dest: './uploads/' })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+        var str = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+        cb(null, str)
+    }
+})
+
+
+
+var upload = multer({ storage: storage  })
 
 
 var app = express();
 
-var jsonParser = bodyParser.json();
+var jsonParser = bodyParser.json({ limit: '10mb', extended: true });
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 app.use(express.static(path.join(__dirname, '/')));
-app.use('/services' , services);
+app.use('/services', services);
 app.use('/resources', resources);
 
+var type = upload.single('profilePic');
 
-app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in JSON format  
+
+app.post('/AddUser', jsonParser, type , function (req, res) {    // Prepare output in JSON format  
 
     var username = req.body.username;
     var password = req.body.password;
-
     var obj = { "name": username, "password": password };
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
@@ -45,9 +58,14 @@ app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in J
             fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
                 if (err) throw err;
                 console.log('created!');
-                res.send('<script>window.location.href="/QuizScreen";</script>');
+                try {
+                    res.send(req.file);
+                } catch (err) {
+                    res.send(400);
+                }
+                res.end("0");
             });
-            
+
         }
     });
 
@@ -130,7 +148,7 @@ app.get('/LoginService', function (req, res) {
 //#endregion
 
 var server = app.listen(8081, function () {
-    var host = server.address().address;    
-    var port = server.address().port;    
+    var host = server.address().address;
+    var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
 })

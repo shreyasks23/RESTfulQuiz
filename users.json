@@ -1,1 +1,34 @@
-[{"name":"mahesh","password":"password1"},{"name":"suresh","password":"password2"},{"name":"ramesh","password":"password3"},{"name":"shreyas","password":"shreyas"},{"name":"shreyas123","password":"123"}]
+[
+    {
+        "name": "mahesh",
+        "password": "password1"
+    },
+    {
+        "name": "suresh",
+        "password": "password2"
+    },
+    {
+        "name": "ramesh",
+        "password": "password3"
+    },
+    {
+        "name": "shreyas",
+        "password": "shreyas"
+    },
+    {
+        "name": "shreyas123",
+        "password": "123"
+    },
+    {
+        "name": "shreyas.ks@excelindia.com",
+        "password": "shreyas"
+    },
+    {
+        "name": "shr",
+        "password": "shreyas"
+    },
+    {
+        "name": "shreyas.ks",
+        "password": "password"
+    }
+]

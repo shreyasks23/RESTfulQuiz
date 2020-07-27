@@ -14,17 +14,5 @@
     {
         "name": "shreyas",
         "password": "shreyas"
-    },
-    {
-        "name": "d1",
-        "password": "d1"
-    },
-    {
-        "name": "d2",
-        "password": "d2"
-    },
-    {
-        "name": "d3",
-        "password": "d3"
-    }
+    }    
 ]

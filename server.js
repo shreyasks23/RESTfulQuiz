@@ -1,30 +1,43 @@
 var express = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\express');
 var bodyParser = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\body-parser');
 
-
-var url = require('url');
 var fs = require("fs");
 var path = require('path');
+var services = require("./services.js");
+var resources = require("./resources.js");
+var multer = require('multer');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-var app = express();
-
-var jsonParser = bodyParser.json();
-
-app.use(express.static(path.join(__dirname, '/')));
-
-
-app.get('/Login', function (req, res) {
-    fs.readFile(__dirname + "/" + "Login.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+        var str = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+        cb(null, str)
+    }
 })
 
-app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in JSON format  
+
+
+var upload = multer({ storage: storage  })
+
+
+var app = express();
+
+var jsonParser = bodyParser.json({ limit: '10mb', extended: true });
+
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
+app.use(express.static(path.join(__dirname, '/')));
+app.use('/services', services);
+app.use('/resources', resources);
+
+var type = upload.single('profilePic');
+
+
+app.post('/AddUser', jsonParser, type , function (req, res) {    // Prepare output in JSON format  
 
     var username = req.body.username;
     var password = req.body.password;
-
     var obj = { "name": username, "password": password };
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
@@ -46,9 +59,14 @@ app.post('/AddUser', jsonParser, function (req, res) {    // Prepare output in J
             fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
                 if (err) throw err;
                 console.log('created!');
+                try {
+                    res.send(req.file);
+                } catch (err) {
+                    res.send(400);
+                }
                 res.end("0");
             });
-            
+
         }
     });
 
@@ -83,6 +101,26 @@ app.post('/LoginServicePost', jsonParser, function (req, res) {
 
 })
 
+app.get('/listUsers', function (req, res) {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+app.get('/QuizScreen', function (req, res) {
+    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+app.get('/Register', function (req, res) {
+    fs.readFile(__dirname + "/" + "Registration.html", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+//#region deprecated methods
+//deprecated
 app.get('/LoginService', function (req, res) {
 
     var un = req.query.username;
@@ -108,57 +146,10 @@ app.get('/LoginService', function (req, res) {
     });
 })
 
-app.get('/listUsers', function (req, res) {
-    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/QuizScreen', function (req, res) {
-    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/QuestionService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "QuestionService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/StudentResponseService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "StudentResponseService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/TestService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "TestService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/BookmarkService', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "BookmarkService.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/LoadQuiz', function (req, res) {
-    fs.readFile(__dirname + "/JS/" + "LoadQuiz.js", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-app.get('/MasterQuestions.txt', function (req, res) {
-    fs.readFile(__dirname + "/" + "MasterQuestions.txt", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
+//#endregion
 
 var server = app.listen(8081, function () {
-    var host = server.address().address;    
-    var port = server.address().port;    
+    var host = server.address().address;
+    var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
 })

@@ -1,22 +1,32 @@
 [
     {
-        "name": "mahesh",
-        "password": "password1",
-        "propic": "ppc"
+        "name": "shreyas",
+        "password": "pass",
+        "ProPicPath": "uploads\\profilePic-1596032105822.jpg"
     },
     {
-        "name": "suresh",
-        "password": "password2",
-        "propic": "ppc"
-    },
-    {
-        "name": "ramesh",
-        "password": "password3",
-        "propic": "ppc"
+        "name": "shreyas123",
+        "password": "shreyas",
+        "ProPicPath": "uploads\\profilePic-1596032797353.jpg"
     },
     {
         "name": "shreyas",
-        "password": "shreyas",
-        "propic": "ppc"
+        "password": "sasas",
+        "ProPicPath": "uploads\\profilePic-1596034051571.jpg"
+    },
+    {
+        "name": "shreyas",
+        "password": "sasa",
+        "ProPicPath": "uploads\\profilePic-1596034194958.jpg"
+    },
+    {
+        "name": "shreyas",
+        "password": "sasa",
+        "ProPicPath": "uploads\\profilePic-1596034242526.jpg"
+    },
+    {
+        "name": "shreyasks",
+        "password": "sasa",
+        "ProPicPath": "uploads\\profilePic-1596034355179.jpg"
     }
 ]

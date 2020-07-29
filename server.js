@@ -39,14 +39,9 @@ app.use(express.static(path.join(__dirname, '/')));
 app.use('/services', services);
 app.use('/resources', resources);
 
-
-app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res) {    // Prepare output in JSON format  
-
+app.post('/CheckUser', jsonParser, function (req, res) {
+    
     var username = req.body.username;
-    var password = req.body.password;
-    var filename = req.file.path;
-
-    var obj = { "name": username, "password": password, "ProPicPath": filename };
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
         var Users = [];
@@ -59,19 +54,37 @@ app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res
         });
         if (UserFound) {
             console.log("user found");
-            //res.send("1");
-            res.redirect("/Register");
+            res.send("1");
         }
         else {
-            Users.push(obj);
-            var jsonString = JSON.stringify(Users);
-            fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
-                if (err) throw err;
-                console.log('created!');
-                //res.send("0");
-                res.redirect("/QuizScreen");
-            });
+            console.log("user not found");
+            res.send("0");
         }
+    });
+})
+
+
+app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res) {    // Prepare output in JSON format  
+
+    var username = req.body.username;
+    var password = req.body.password;
+    var filename = req.file.path;
+    var Users = [];
+
+    var obj = { "name": username, "password": password, "ProPicPath": filename };
+
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
+        Users = JSON.parse(data);
+
+        Users.push(obj);
+        var jsonString = JSON.stringify(Users);
+        fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
+            if (err) throw err;
+            console.log('created!');
+            //res.send("0");
+            res.end("1");
+        });
+
     });
 })
 
@@ -79,7 +92,7 @@ app.post('/LoginServicePost', jsonParser, function (req, res) {
     // Prepare output in JSON format  
 
     var username = req.body.username;
-    var password = req.body.password;    
+    var password = req.body.password;
 
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
@@ -103,56 +116,11 @@ app.post('/LoginServicePost', jsonParser, function (req, res) {
 
 })
 
-app.get('/listUsers', function (req, res) {
-    fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
 app.get('/QuizScreen', function (req, res) {
     fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
         res.end(data);
     });
 })
-
-app.get('/Register', function (req, res) {
-    fs.readFile(__dirname + "/" + "Registration.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
-
-//#region deprecated methods
-//deprecated
-app.get('/LoginService', function (req, res) {
-
-    var un = req.query.username;
-    var pass = req.query.password;
-
-    res.end(ValidateUserFromJson(un, pass));
-    // fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-    //     var Users = JSON.parse(data);
-    //     var UserFound = false;
-    //     Users.forEach(element => {
-    //         if (element.name == un && element.password == pass) {
-    //             UserFound = true;
-    //         }
-    //     });
-    //     if (UserFound) {
-    //         console.log("user found");
-    //         res.end("found");
-
-    //     }
-    //     else {
-    //         console.log("user not found");
-    //         res.end("notfound");
-    //     }
-
-    // });
-})
-
-//#endregion
-
-//#region helperMethods
 
 // function ValidateUserFromJson(un, pass) {
 //     var result = '';

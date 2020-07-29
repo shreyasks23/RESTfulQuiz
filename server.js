@@ -39,10 +39,8 @@ app.use(express.static(path.join(__dirname, '/')));
 app.use('/services', services);
 app.use('/resources', resources);
 
-var type = upload.single('profilePic');
 
-
-app.post('/AddUser', jsonParser, type, function (req, res) {    // Prepare output in JSON format  
+app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res) {    // Prepare output in JSON format  
 
     var username = req.body.username;
     var password = req.body.password;
@@ -61,7 +59,8 @@ app.post('/AddUser', jsonParser, type, function (req, res) {    // Prepare outpu
         });
         if (UserFound) {
             console.log("user found");
-            res.end("1");
+            //res.send("1");
+            res.redirect("/Register");
         }
         else {
             Users.push(obj);
@@ -69,7 +68,8 @@ app.post('/AddUser', jsonParser, type, function (req, res) {    // Prepare outpu
             fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
                 if (err) throw err;
                 console.log('created!');
-                res.end("0");
+                //res.send("0");
+                res.redirect("/QuizScreen");
             });
         }
     });

@@ -23,15 +23,15 @@
 
 <body style="background-color : aliceblue;">
     <div id='formContainer' class="container">
-        <form id='RegisterForm' name='RegisterForm' enctype="multipart/form-data">
+        <form id='RegisterForm' action="/AddUser"  name='RegisterForm' enctype="multipart/form-data" method="POST">
             <h4>Upload Profile Picture</h4>  
-            <img id="preview" src="#" alt="your image" /> 
+            <img id="preview" src="#" alt="your image" style="display:none" /> 
             <input id='profile' type="file" name="profilePic" accept="image/png, image/jpeg" onchange="previewFile()">          
             <h4>User name</h4>
             <input id='name' type="text" name="username"> </br></br>
             <h4>password</h4>
             <input id='pass' type="password" name="password"></br></br>  
-            <button onclick="AddUser()">Add user</button>
+            <input type="submit"  value="Add user">
         </form>
     </div>
 
@@ -41,12 +41,13 @@
 </body>
 <script>
 function previewFile() {
-  const preview = document.getElementById("preview");
+  const preview = document.getElementById("preview");  
   const file = document.querySelector('input[type=file]').files[0];
   const reader = new FileReader();
 
   reader.addEventListener("load", function () {
     // convert image file to base64 string
+    preview.style.display = "inline";
     preview.src = reader.result;
   }, false);
 

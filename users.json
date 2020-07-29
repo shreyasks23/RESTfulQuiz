@@ -43,5 +43,10 @@
         "name": "shreyas.ks@excelindia.com",
         "password": "shreyas",
         "ProPicPath": "uploads\\profilePic-1595864268215.jpg"
+    },
+    {
+        "name": "dummy1",
+        "password": "pass",
+        "ProPicPath": "uploads\\profilePic-1595942360236.jpg"
     }
 ]

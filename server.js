@@ -1,5 +1,5 @@
-var express = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\express');
-var bodyParser = require('C:\\Users\\shreyas\\AppData\\Roaming\\npm\\node_modules\\body-parser');
+var express = require('express');
+var bodyParser = require('body-parser');
 
 var fs = require("fs");
 var path = require('path');

@@ -18,35 +18,5 @@
         "name": "shreyas",
         "password": "shreyas",
         "propic": "ppc"
-    },
-    {
-        "name": "sasa",
-        "password": "sasa",
-        "ProPicPath": "uploads\\profilePic-1595863052509.jpg"
-    },
-    {
-        "name": "ssasas",
-        "password": "sasa",
-        "ProPicPath": "uploads\\profilePic-1595863361832.jpg"
-    },
-    {
-        "name": "shrey",
-        "password": "shreyas",
-        "ProPicPath": "uploads\\profilePic-1595864152005.jpg"
-    },
-    {
-        "name": "sh",
-        "password": "shreyas",
-        "ProPicPath": "uploads\\profilePic-1595864232361.jpg"
-    },
-    {
-        "name": "shreyas.ks@excelindia.com",
-        "password": "shreyas",
-        "ProPicPath": "uploads\\profilePic-1595864268215.jpg"
-    },
-    {
-        "name": "dummy1",
-        "password": "pass",
-        "ProPicPath": "uploads\\profilePic-1595942360236.jpg"
     }
 ]

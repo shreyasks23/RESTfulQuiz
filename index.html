@@ -17,21 +17,38 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <link rel="stylesheet" href="public/CSS/styles.css" type="text/css">
 </head>
 
 <body style="background-color : aliceblue;" class="container" style="position: relative" onload="bodyLoad()">
+
+    <div id='RegisterDiv' style="display: none;">
+        <form id='RegisterForm' name='RegisterForm' enctype="multipart/form-data">
+            <h4>Upload Profile Picture</h4>  
+            <img id="preview" src="#" alt="your image" style="display:none" /> 
+            <input id='profile' type="file" name="profilePic" accept="image/png, image/jpeg" onchange="previewFile()">          
+            <h4>User name</h4>
+            <input id='username' type="text" name="username"> </br></br>
+            <h4>password</h4>
+            <input id='password' type="password" name="password"></br></br>  
+            <button type="button" onclick="AddUser()">Register</button>
+        </form>
+    </div>
+
     <div id='loginDiv'>        
             <h3>Login name</h3>
             <input id='name' type="text" name="username"> </br></br>
             <h3>password</h3>
             <input id='pass' type="password" name="password"></br></br>
             <button type="button" onclick="ValidateUserUsingPost()">Submit</button>            
-            <a href="/Register">Register user</a>          
+            <button type="button" onclick="displayRegister()">Register</button>      
     </div>
 
     <div id='QuizDiv' style="display: none;">
-        <h2>Quiz</h2>
+        <img id="DispProPic" >
+        <h2>Quiz</h2>        
+        <span id='DispUserId'></span>
+        
         <div id='ExamModes' align='center'>
             <input type="radio" name='modes' id="ExamMode" checked='true'
                 onclick="TestService.setTestMode(1);bodyLoad()"><span>Exam Mode</span> &nbsp;

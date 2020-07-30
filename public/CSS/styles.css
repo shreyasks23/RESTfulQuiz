@@ -56,3 +56,10 @@ img {
     padding: 5px;
     /* background-color:darkgrey; */
 }
+
+#DispProPic{
+    float : right;
+}
+#DispUserId{
+    float: right;
+}

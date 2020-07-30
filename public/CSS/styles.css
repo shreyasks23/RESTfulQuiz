@@ -18,26 +18,9 @@ img {
     height: 80px;
 }
 
-/* #Prev_img {
-    background-image: url(~/images/previous-button.png);
-}
-
-#Next_img {
-    background-image: url(~/images/next-button.png);
-} */
-
 .button {
-    width: 50px;
-    height: 40px;
-    background-color: coral;
-    border: none;
-    color: black;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    background-color: darkkhaki;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .buttonR {
@@ -50,16 +33,46 @@ img {
 }
 #QuestionNav{
     width: inherit;
-    align-self: stretch;
-    /* border: .5px solid black; */
+    align-self: stretch;    
     margin: 5px;
     padding: 5px;
-    /* background-color:darkgrey; */
+    
+}
+
+#preview{
+    border:2px solid #fff;      
+      box-shadow: 10px 10px 5px #ccc;
+      -moz-box-shadow: 10px 10px 5px #ccc;
+      -webkit-box-shadow: 10px 10px 5px #ccc;
+      -khtml-box-shadow: 10px 10px 5px #ccc;
+    width: 100px;
+    height: 80px;
 }
 
 #DispProPic{
+    border:2px solid #fff;      
+      box-shadow: 10px 10px 5px #ccc;
+      -moz-box-shadow: 10px 10px 5px #ccc;
+      -webkit-box-shadow: 10px 10px 5px #ccc;
+      -khtml-box-shadow: 10px 10px 5px #ccc;
     float : right;
+    width: 100px;
+    height: 80px;
 }
 #DispUserId{
     float: right;
+    font-weight: bold;
 }
+
+.shadow{
+    border:2px solid #fff;      
+      box-shadow: 10px 10px 5px khaki;
+      -moz-box-shadow: 10px 10px 5px khaki;
+      -webkit-box-shadow: 10px 10px 5px khaki;
+      -khtml-box-shadow: 10px 10px 5px khaki;      
+}
+
+.SectionButton:hover {
+    background-color: chocolate; /* Green */
+    color: white;
+  }

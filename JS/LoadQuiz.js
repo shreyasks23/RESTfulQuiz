@@ -13,7 +13,7 @@ function displaySections() {
     var sectionArr = TestService.getAllSectionNames();
     var sectionButtonStr = '';
     for (i = 0; i < sectionArr.length; i++) {
-        sectionButtonStr += '<button class="btn navbar-btn" onclick="navToSection(\'' + sectionArr[i] + '\')">' + sectionArr[i] + '</button>';
+        sectionButtonStr += '<button class="btn button buttonR SectionButton" onclick="navToSection(\'' + sectionArr[i] + '\') , SectionButtonHighlight(this)">' + sectionArr[i] + '</button>';
     }
     document.getElementById("sectionDiv").innerHTML = sectionButtonStr;
 }

@@ -1,5 +1,16 @@
+function SectionButtonHighlight(obj){
+    var btns = document.getElementsByClassName('SectionButton');
+    for(var i = 0 ; i < btns.length ; i++)
+    {
+        btns[i].style.backgroundColor = "darkkhaki";
+    }
 
-function ValidateUserUsingPost() {
+    obj.style.backgroundColor = "Blue";
+
+}
+
+
+function ValidateUser() {
 
     //HTML elements
     var QuizDiv = document.getElementById('QuizDiv');
@@ -15,7 +26,7 @@ function ValidateUserUsingPost() {
 
     //ajax request to determine user exists
     var requestObj = new XMLHttpRequest();
-    requestObj.open("POST", '/LoginServicePost', false);
+    requestObj.open("POST", '/LoginService', false);
     requestObj.setRequestHeader("Content-Type", "application/json");
     requestObj.send(JSON.stringify(obj));
 

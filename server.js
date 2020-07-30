@@ -1,12 +1,15 @@
+//Module imports
 var express = require('express');
 var bodyParser = require('body-parser');
-
 var fs = require("fs");
 var path = require('path');
-var services = require("./services.js");
-var resources = require("./resources.js");
 var multer = require('multer');
 
+//js and questions services
+var services = require("./services.js");
+var resources = require("./resources.js");
+
+//multer storage object initialization
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads')
@@ -17,6 +20,7 @@ var storage = multer.diskStorage({
     }
 })
 
+//multer instatiation
 var uploader = multer({ storage: storage })
 
 
@@ -24,10 +28,13 @@ var app = express();
 
 var jsonParser = bodyParser.json({ extended: true });
 
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })) //restrict file size to upload
+
+//serve static files(CSS and images)
 app.use(express.static(path.join(__dirname, '/')));
 app.use(express.static('public'));
-//app.use(express.static('public/uploaders'));
+
+
 app.use('/services', services);
 app.use('/resources', resources);
 
@@ -89,7 +96,7 @@ app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, r
     });
 })
 
-app.post('/LoginServicePost', jsonParser, function (req, res) {    
+app.post('/LoginService', jsonParser, function (req, res) {    
 
     var username = req.body.username;
     var password = req.body.password;

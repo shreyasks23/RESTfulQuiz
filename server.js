@@ -9,7 +9,7 @@ var multer = require('multer');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads')
+        cb(null, './public/uploads')
     },
     filename: function (req, file, cb) {
         var str = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
@@ -17,17 +17,7 @@ var storage = multer.diskStorage({
     }
 })
 
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
-
-
-
-var upload = multer({ storage: storage })
+var uploader = multer({ storage: storage })
 
 
 var app = express();
@@ -36,11 +26,22 @@ var jsonParser = bodyParser.json({ extended: true });
 
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static('public'));
+//app.use(express.static('public/uploaders'));
 app.use('/services', services);
 app.use('/resources', resources);
 
+
+
+app.get('/QuizScreen', function (req, res) {
+    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
+        res.end(data);
+    });
+})
+
+
 app.post('/CheckUser', jsonParser, function (req, res) {
-    
+
     var username = req.body.username;
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
@@ -64,11 +65,12 @@ app.post('/CheckUser', jsonParser, function (req, res) {
 })
 
 
-app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res) {    // Prepare output in JSON format  
+app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, res) {  
+     // Prepare output in JSON format  
 
     var username = req.body.username;
     var password = req.body.password;
-    var filename = req.file.path;
+    var filename = encodeURI(req.file.path);
     var Users = [];
 
     var obj = { "name": username, "password": password, "ProPicPath": filename };
@@ -80,33 +82,39 @@ app.post('/AddUser', jsonParser, upload.single('profilePic'), function (req, res
         var jsonString = JSON.stringify(Users);
         fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
             if (err) throw err;
-            console.log('created!');
-            //res.send("0");
-            res.end("1");
+            console.log('created!');           
+            res.end("0");
         });
 
     });
 })
 
-app.post('/LoginServicePost', jsonParser, function (req, res) {
-    // Prepare output in JSON format  
+app.post('/LoginServicePost', jsonParser, function (req, res) {    
 
     var username = req.body.username;
     var password = req.body.password;
 
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-        var Users = JSON.parse(data);
+        var Users = [];
+        var UserProfile = {};
+        Users = JSON.parse(data);
         var UserFound = false;
-        Users.forEach(element => {
-            if (element.name == username && element.password == password) {
+
+        for(var i = 0 ; i< Users.length; i++)
+        {
+            if(Users[i].name == username && Users[i].password == password ){
                 UserFound = true;
+                UserProfile = Users[i];
+                break;
             }
-        });
+        }       
 
         if (UserFound) {
             console.log("user found");
-            res.end("found");
+            res.setHeader("Content-type","image/jpeg");
+            res.write(JSON.stringify(UserProfile));
+            res.end();
         }
         else {
             console.log("user not found");
@@ -116,43 +124,8 @@ app.post('/LoginServicePost', jsonParser, function (req, res) {
 
 })
 
-app.get('/QuizScreen', function (req, res) {
-    fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
-        res.end(data);
-    });
-})
 
-// function ValidateUserFromJson(un, pass) {
-//     var result = '';
-//     var Users = [];
-//     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
-//         Users = JSON.parse(data);
-//     });
-//         var UserFound = false;
-
-//         Users.forEach(element => {
-//             if (element.name == un && element.password == pass) {
-//                 UserFound = true;
-//             }
-//         });
-//         if (UserFound) {
-//             console.log("user found");
-//             result = 'found';
-
-//         }
-//         else {
-//             console.log("user not found");
-//             result = 'notfound';
-//         }
-
-//     // });
-
-//     return result;
-// }
-
-//#endregion
-
-
+//server initialization
 var server = app.listen(8081, function () {
     var host = server.address().address;
     var port = server.address().port;

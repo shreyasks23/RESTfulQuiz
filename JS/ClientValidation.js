@@ -1,42 +1,36 @@
-//deprecated
-function ValidateUser() {
-    var un = document.getElementById('name').value;
-    var ps = document.getElementById('pass').value;
-    var QuizDiv = document.getElementById('QuizDiv');
-    var loginDiv = document.getElementById('loginDiv');
-
-    var requestObj = new XMLHttpRequest();
-    var querystr = '/LoginService?username=' + un + '&password=' + ps;
-    requestObj.open("GET", querystr, false);
-
-
-    requestObj.send(querystr);
-    var response = requestObj.responseText;
-    if (response == 'found') {
-        QuizDiv.style.display = 'block';
-        loginDiv.style.display = 'none';
-    }
-
-}
 
 function ValidateUserUsingPost() {
 
+    //HTML elements
     var QuizDiv = document.getElementById('QuizDiv');
     var loginDiv = document.getElementById('loginDiv');
-    var loginForm = document.getElementById('loginForm');
+    var DispProPic = document.getElementById('DispProPic');
+    var DispUserId = document.getElementById('DispUserId');
+
+
+    //user object
     var un = document.getElementById('name').value;
     var ps = document.getElementById('pass').value;
     var obj = { "username": un, "password": ps };
 
+    //ajax request to determine user exists
     var requestObj = new XMLHttpRequest();
     requestObj.open("POST", '/LoginServicePost', false);
     requestObj.setRequestHeader("Content-Type", "application/json");
     requestObj.send(JSON.stringify(obj));
 
     var response = requestObj.responseText;
-    if (response == 'found') {
+    if(response == "notfound"){
+        alert("user not found");
+    }
+    
+    else if (response != null || response != undefined) {        
+        var UserProfile = JSON.parse(response);
         QuizDiv.style.display = 'block';
         loginDiv.style.display = 'none';
+        DispProPic.src = UserProfile.ProPicPath;
+        DispUserId.innerHTML = UserProfile.name;
+
     }
 }
 
@@ -59,16 +53,15 @@ function AddUser() {
         var requestObj = new XMLHttpRequest();
         requestObj.open("POST", '/AddUser', false);
 
-        var formData = new FormData(form);
-        //requestObj.setRequestHeader("Content-Type","application/json");
+        var formData = new FormData(form);        
         requestObj.send(formData);
         var response = requestObj.responseText;
-        if (response == "1") {
+        console.log(response);
+        if (response == "0") {
             alert("User created successfully");
             document.getElementById("RegisterDiv").style.display = "none";
             document.getElementById("loginDiv").style.display = "inline";
         }
-
 
     }
 

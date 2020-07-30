@@ -91,7 +91,7 @@ function previewFile() {
 
     reader.addEventListener("load", function () {
         // convert image file to base64 string
-        preview.style.display = "inline";
+        preview.style.display = "block";
         preview.src = reader.result;
     }, false);
 

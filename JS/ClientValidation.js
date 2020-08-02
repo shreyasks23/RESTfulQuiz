@@ -61,14 +61,14 @@ function AddUser() {
         alert("user exists");
     }
     else {
-        var InnerRequestObj = new XMLHttpRequest();
-        InnerRequestObj.open("POST", '/AddUser', false);
+        var innerRequestObj = new XMLHttpRequest();
+        innerRequestObj.open("POST", '/AddUser', false);
 
         var formData = new FormData(form);        
-        requestObj.send(formData);
-        var Innerresponse = requestObj.responseText;
-        console.log(Innerresponse);
-        if (response == "0") {
+        innerRequestObj.send(formData);
+        var innerResponse = innerRequestObj.responseText;
+        console.log(innerResponse);
+        if (innerResponse == "0") {
             alert("User created successfully");
             document.getElementById("RegisterDiv").style.display = "none";
             document.getElementById("loginDiv").style.display = "inline";
@@ -89,8 +89,7 @@ function previewFile() {
     var file = document.querySelector('input[type=file]').files[0];
     var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
-        // convert image file to base64 string
+    reader.addEventListener("load", function () {        
         preview.style.display = "block";
         preview.src = reader.result;
     }, false);

@@ -30,7 +30,7 @@ var jsonParser = bodyParser.json({ extended: true });
 
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); //restrict file size to upload
 
-//serve static files(CSS and images)
+//serve static files in public folder(CSS and images)
 app.use(express.static(path.join(__dirname, '/')));
 app.use(express.static('public'));
 
@@ -118,7 +118,7 @@ app.post('/LoginService', jsonParser, function (req, res) {
 
         if (UserFound) {
             console.log("user found");
-            res.setHeader("Content-type", "image/jpeg");
+            res.setHeader("Content-type", "application/json");
             res.write(JSON.stringify(UserProfile));
             res.end();
         }

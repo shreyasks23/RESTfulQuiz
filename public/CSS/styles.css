@@ -1,5 +1,5 @@
 .innercontainer {
-    
+
     border: 1px solid black;
 }
 
@@ -20,60 +20,61 @@ img {
 
 .button {
     background-color: darkkhaki;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .buttonR {
     border-radius: 50%;
 }
 
-.BtnNav
-{
+.BtnNav {
     border-radius: 30%
 }
-#QuestionNav{
+
+#QuestionNav {
     width: inherit;
-    align-self: stretch;    
+    align-self: stretch;
     margin: 5px;
     padding: 5px;
-    
+
 }
 
-#preview{
-    border:2px solid #fff;      
-      box-shadow: 10px 10px 5px #ccc;
-      -moz-box-shadow: 10px 10px 5px #ccc;
-      -webkit-box-shadow: 10px 10px 5px #ccc;
-      -khtml-box-shadow: 10px 10px 5px #ccc;
+#preview {
+    border: 2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
     width: 100px;
     height: 80px;
 }
 
-#DispProPic{
+#DispProPic {
     -moz-box-shadow: 0px 6px 5px #ccc;
-  -webkit-box-shadow: 0px 6px 5px #ccc;
-  box-shadow: 0px 6px 5px #ccc;
-  -moz-border-radius:190px;
-  -webkit-border-radius:190px;
-  border-radius:190px;
-    float : right;
+    -webkit-box-shadow: 0px 6px 5px #ccc;
+    box-shadow: 0px 6px 5px #ccc;
+    -moz-border-radius: 190px;
+    -webkit-border-radius: 190px;
+    border-radius: 190px;
+    float: right;
     width: 100px;
     height: 80px;
 }
-#DispUserId{
+
+#DispUserId {
     float: right;
     font-weight: bold;
 }
 
-.shadow{
-    border:2px solid #fff;      
-      box-shadow: 10px 10px 5px khaki;
-      -moz-box-shadow: 10px 10px 5px khaki;
-      -webkit-box-shadow: 10px 10px 5px khaki;
-      -khtml-box-shadow: 10px 10px 5px khaki;      
+.shadow {
+    border: 2px solid #fff;
+    box-shadow: 10px 10px 5px khaki;
+    -moz-box-shadow: 10px 10px 5px khaki;
+    -webkit-box-shadow: 10px 10px 5px khaki;
+    -khtml-box-shadow: 10px 10px 5px khaki;
 }
 
 .SectionButton:hover {
-    background-color: chocolate; /* Green */
+    background-color: chocolate;    
     color: white;
-  }
+}

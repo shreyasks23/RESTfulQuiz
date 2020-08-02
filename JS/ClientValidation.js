@@ -5,7 +5,7 @@ function SectionButtonHighlight(obj){
         btns[i].style.backgroundColor = "darkkhaki";
     }
 
-    obj.style.backgroundColor = "Blue";
+    obj.style.backgroundColor = "#ba533a";
 
 }
 
@@ -61,13 +61,13 @@ function AddUser() {
         alert("user exists");
     }
     else {
-        var requestObj = new XMLHttpRequest();
-        requestObj.open("POST", '/AddUser', false);
+        var InnerRequestObj = new XMLHttpRequest();
+        InnerRequestObj.open("POST", '/AddUser', false);
 
         var formData = new FormData(form);        
         requestObj.send(formData);
-        var response = requestObj.responseText;
-        console.log(response);
+        var Innerresponse = requestObj.responseText;
+        console.log(Innerresponse);
         if (response == "0") {
             alert("User created successfully");
             document.getElementById("RegisterDiv").style.display = "none";
@@ -85,9 +85,9 @@ function displayRegister() {
 }
 
 function previewFile() {
-    const preview = document.getElementById("preview");
-    const file = document.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
+    var preview = document.getElementById("preview");
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
 
     reader.addEventListener("load", function () {
         // convert image file to base64 string

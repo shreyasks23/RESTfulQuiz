@@ -8,5 +8,5 @@ router.get('/MasterQuestions', function (req, res) {
         res.end(data);
     });
 })
-//adding comments
+
 module.exports = router;

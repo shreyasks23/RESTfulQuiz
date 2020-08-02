@@ -12,23 +12,23 @@ var resources = require("./resources.js");
 //multer storage object initialization
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/uploads')
+        cb(null, './public/uploads');
     },
     filename: function (req, file, cb) {
         var str = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
-        cb(null, str)
+        cb(null, str);
     }
-})
+});
 
 //multer instatiation
-var uploader = multer({ storage: storage })
+var uploader = multer({ storage: storage });
 
 
 var app = express();
 
 var jsonParser = bodyParser.json({ extended: true });
 
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })) //restrict file size to upload
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); //restrict file size to upload
 
 //serve static files(CSS and images)
 app.use(express.static(path.join(__dirname, '/')));
@@ -44,7 +44,7 @@ app.get('/QuizScreen', function (req, res) {
     fs.readFile(__dirname + "/" + "index.html", 'utf8', function (err, data) {
         res.end(data);
     });
-})
+});
 
 
 app.post('/CheckUser', jsonParser, function (req, res) {
@@ -55,11 +55,11 @@ app.post('/CheckUser', jsonParser, function (req, res) {
         var Users = [];
         Users = JSON.parse(data);
         var UserFound = false;
-        Users.forEach(element => {
+        for (var i = 0; i < Users.length; i++){
             if (element.name == username) {
                 UserFound = true;
-            }
-        });
+            } break;
+        }       
         if (UserFound) {
             console.log("user found");
             res.send("1");
@@ -69,11 +69,11 @@ app.post('/CheckUser', jsonParser, function (req, res) {
             res.send("0");
         }
     });
-})
+});
 
 
-app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, res) {  
-     // Prepare output in JSON format  
+app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, res) {
+    // Prepare output in JSON format  
 
     var username = req.body.username;
     var password = req.body.password;
@@ -89,14 +89,14 @@ app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, r
         var jsonString = JSON.stringify(Users);
         fs.writeFile(__dirname + "/" + "users.json", jsonString, function (err) {
             if (err) throw err;
-            console.log('created!');           
+            console.log('created!');
             res.end("0");
         });
 
     });
-})
+});
 
-app.post('/LoginService', jsonParser, function (req, res) {    
+app.post('/LoginService', jsonParser, function (req, res) {
 
     var username = req.body.username;
     var password = req.body.password;
@@ -108,18 +108,17 @@ app.post('/LoginService', jsonParser, function (req, res) {
         Users = JSON.parse(data);
         var UserFound = false;
 
-        for(var i = 0 ; i< Users.length; i++)
-        {
-            if(Users[i].name == username && Users[i].password == password ){
+        for (var i = 0; i < Users.length; i++) {
+            if (Users[i].name == username && Users[i].password == password) {
                 UserFound = true;
                 UserProfile = Users[i];
                 break;
             }
-        }       
+        }
 
         if (UserFound) {
             console.log("user found");
-            res.setHeader("Content-type","image/jpeg");
+            res.setHeader("Content-type", "image/jpeg");
             res.write(JSON.stringify(UserProfile));
             res.end();
         }
@@ -129,7 +128,7 @@ app.post('/LoginService', jsonParser, function (req, res) {
         }
     });
 
-})
+});
 
 
 //server initialization
@@ -137,4 +136,4 @@ var server = app.listen(8081, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
-})
+});

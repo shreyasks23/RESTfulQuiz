@@ -23,7 +23,7 @@ var BookmarkService = (function () {
         setBookmark: setBookmarkFunc,
         getAllBookmarks: getAllBookmarksFunc,
         unBookmark: unBookmarkFunc
-    }
+    };
 
     return returnObj;
 })();

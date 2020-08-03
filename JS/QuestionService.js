@@ -69,6 +69,7 @@ var QuestionService = (function () {
         FirstQuestion: function () {
             currentSectionQuestionID = 0;
             return currentSectionQuestions[currentSectionQuestionID];
+
         }
     };
 })();

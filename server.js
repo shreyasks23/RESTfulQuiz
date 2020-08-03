@@ -63,7 +63,7 @@ app.post('/CheckUser', jsonParser, function (req, res) {
         Users = JSON.parse(data);
         var UserFound = false;
         for (var i = 0; i < Users.length; i++) {
-            if (element.name == username) {
+            if (Users[i].name == username) {
                 UserFound = true;
             }
             break;

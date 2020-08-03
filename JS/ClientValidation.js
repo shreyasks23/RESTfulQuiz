@@ -1,7 +1,6 @@
-function SectionButtonHighlight(obj){
+function SectionButtonHighlight(obj) {
     var btns = document.getElementsByClassName('SectionButton');
-    for(var i = 0 ; i < btns.length ; i++)
-    {
+    for (var i = 0; i < btns.length; i++) {
         btns[i].style.backgroundColor = "darkkhaki";
     }
 
@@ -22,7 +21,10 @@ function ValidateUser() {
     //user object
     var un = document.getElementById('name').value;
     var ps = document.getElementById('pass').value;
-    var obj = { "username": un, "password": ps };
+    var obj = {
+        "username": un,
+        "password": ps
+    };
 
     //ajax request to determine user exists
     var requestObj = new XMLHttpRequest();
@@ -31,11 +33,9 @@ function ValidateUser() {
     requestObj.send(JSON.stringify(obj));
 
     var response = requestObj.responseText;
-    if(response == "notfound"){
+    if (response == "notfound") {
         alert("user not found");
-    }
-    
-    else if (response != null || response != undefined) {        
+    } else if (response != null || response != undefined) {
         var UserProfile = JSON.parse(response);
         QuizDiv.style.display = 'block';
         loginDiv.style.display = 'none';
@@ -50,7 +50,10 @@ function AddUser() {
     var ps = document.getElementById('password').value;
     var form = document.getElementById('RegisterForm');
 
-    var obj = { "username": un, "password": ps };
+    var obj = {
+        "username": un,
+        "password": ps
+    };
 
     var requestObj = new XMLHttpRequest();
     requestObj.open("POST", '/CheckUser', false);
@@ -59,12 +62,11 @@ function AddUser() {
     var response = requestObj.responseText;
     if (response == "1") {
         alert("user exists");
-    }
-    else {
+    } else {
         var InnerRequestObj = new XMLHttpRequest();
         InnerRequestObj.open("POST", '/AddUser', false);
 
-        var formData = new FormData(form);        
+        var formData = new FormData(form);
         requestObj.send(formData);
         var Innerresponse = requestObj.responseText;
         console.log(Innerresponse);

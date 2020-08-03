@@ -21,14 +21,21 @@ var storage = multer.diskStorage({
 });
 
 //multer instatiation
-var uploader = multer({ storage: storage });
+var uploader = multer({
+    storage: storage
+});
 
 
 var app = express();
 
-var jsonParser = bodyParser.json({ extended: true });
+var jsonParser = bodyParser.json({
+    extended: true
+});
 
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); //restrict file size to upload
+app.use(bodyParser.urlencoded({
+    limit: '10mb',
+    extended: true
+})); //restrict file size to upload
 
 //serve static files in public folder(CSS and images)
 app.use(express.static(path.join(__dirname, '/')));
@@ -55,16 +62,16 @@ app.post('/CheckUser', jsonParser, function (req, res) {
         var Users = [];
         Users = JSON.parse(data);
         var UserFound = false;
-        for (var i = 0; i < Users.length; i++){
+        for (var i = 0; i < Users.length; i++) {
             if (element.name == username) {
                 UserFound = true;
-            } break;
-        }       
+            }
+            break;
+        }
         if (UserFound) {
             console.log("user found");
             res.send("1");
-        }
-        else {
+        } else {
             console.log("user not found");
             res.send("0");
         }
@@ -80,7 +87,11 @@ app.post('/AddUser', jsonParser, uploader.single('profilePic'), function (req, r
     var filename = encodeURI(req.file.path);
     var Users = [];
 
-    var obj = { "name": username, "password": password, "ProPicPath": filename };
+    var obj = {
+        "name": username,
+        "password": password,
+        "ProPicPath": filename
+    };
 
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) {
         Users = JSON.parse(data);
@@ -121,8 +132,7 @@ app.post('/LoginService', jsonParser, function (req, res) {
             res.setHeader("Content-type", "application/json");
             res.write(JSON.stringify(UserProfile));
             res.end();
-        }
-        else {
+        } else {
             console.log("user not found");
             res.end("notfound");
         }

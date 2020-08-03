@@ -16,30 +16,30 @@ var QuestionService = (function () {
 
     function setCurrentSectionFunc(Section) {
         currentSection = Section;
-        currentSectionQuestions = MasterQuestion.filter(function (obj) { return obj.Section == Section });
+        currentSectionQuestions = MasterQuestion.filter(function (obj) {
+            return obj.Section == Section;
+        });
     }
 
     function NextQuestionFunc() {
         currentSectionQuestionID++;
-        if (currentSectionQuestionID == currentSectionQuestions.length) { currentSectionQuestionID-- }
+        if (currentSectionQuestionID == currentSectionQuestions.length) {
+            currentSectionQuestionID--;
+        }
         return currentSectionQuestions[currentSectionQuestionID];
     }
 
     function PreviousQuestionFunc() {
         currentSectionQuestionID--;
-        if (currentSectionQuestionID < 0) { currentSectionQuestionID = 0 }
+        if (currentSectionQuestionID < 0) {
+            currentSectionQuestionID = 0;
+        }
         return currentSectionQuestions[currentSectionQuestionID];
     }
 
     function getQuestionID() {
         return currentSectionQuestionID;
     }
-
-    function getMasterQuestionID() {
-        return currentSectionQuestions[currentSectionQuestionID].MQIndex;
-    }
-
-
 
     function getMasterQuestionID() {
         return currentSectionQuestions[currentSectionQuestionID].MQIndex;

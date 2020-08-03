@@ -1,4 +1,3 @@
-
 var StudentResponseService = (function () {
     var studentResponseArray = [];
 
@@ -12,8 +11,7 @@ var StudentResponseService = (function () {
     var returnObj = {
         getStoredResponse: getStoredResponseFunc,
         storeUserResponse: storeUserResponseFunc
-    }
+    };
 
     return returnObj;
 })();
-

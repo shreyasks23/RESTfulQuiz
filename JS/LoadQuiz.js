@@ -55,8 +55,7 @@ function displayQuesText(qobj) {
         if (stuResponse != undefined) {
             document.getElementById("rd" + stuResponse).checked = true;
         }
-    }
-    else {
+    } else {
         DisplayQuestionsInReviewMode(qobj);
     }
 
@@ -106,18 +105,15 @@ function DisplayQuestionsInReviewMode(QuestionObj) {
         tick1 = "&#10004;";
         span.innerHTML = tick1;
         container.insertBefore(span, container.childNodes[0]);
-    }
-    else if (correct_opt == 2) {
+    } else if (correct_opt == 2) {
         tick2 = "&#10004;";
         span.innerHTML = tick2;
         container.insertBefore(span, container.childNodes[7]);
-    }
-    else if (correct_opt == 3) {
+    } else if (correct_opt == 3) {
         tick3 = "&#10004;";
         span.innerHTML = tick3;
         container.insertBefore(span, container.childNodes[12]);
-    }
-    else if (correct_opt == 4) {
+    } else if (correct_opt == 4) {
         tick4 = "&#10004;";
         span.innerHTML = tick4;
         container.insertBefore(span, container.childNodes[18]);

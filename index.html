@@ -1,89 +1,91 @@
 <html>
 
-<head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <head>
+        <title>Quiz App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+            integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="public/CSS/styles.css" type="text/css">
-</head>
+        <link rel="stylesheet" href="public/CSS/styles.css" type="text/css">
+    </head>
 
-<body style="background-color : aliceblue;" class="container" style="position: relative" onload="bodyLoad()">
+    <body style="background-color : aliceblue;" class="container" style="position: relative" onload="bodyLoad()">
 
-    <div id='RegisterDiv' style="display: none;">
-        <form id='RegisterForm' name='RegisterForm' enctype="multipart/form-data">
-            <h4>Upload Profile Picture</h4>  
-            <img id="preview" src="#" alt="your image" style="display:none" /> </br>
-            <input id='profile' type="file" name="profilePic" accept="image/png, image/jpeg" onchange="previewFile()"></br>          
-            <h4>User name</h4>
-            <input id='username' type="text" name="username"> </br></br>
-            <h4>password</h4>
-            <input id='password' type="password" name="password"></br></br>  
-            <button type="button" onclick="AddUser()">Register</button>
-        </form>
-    </div>
-
-    <div id='loginDiv'>        
+        <div id='loginDiv'>
             <h3>Login name</h3>
             <input id='name' type="text" name="username"> </br></br>
             <h3>password</h3>
             <input id='pass' type="password" name="password"></br></br>
-            <button type="button" onclick="ValidateUser()">Submit</button>            
-            <button type="button" onclick="displayRegister()">Register</button>      
-    </div>
-
-    <div id='QuizDiv' style="display: none;">
-        <img id="DispProPic" >
-        <h2>Quiz</h2>        
-        <span id='DispUserId'></span>
-        
-        <div id='ExamModes' align='center'>
-            <input type="radio" name='modes' id="ExamMode" checked='true'
-                onclick="TestService.setTestMode(1);bodyLoad()"><span>Exam Mode</span> &nbsp;
-            <input type="radio" name='modes' id="ReviewMode"
-                onclick="TestService.setTestMode(2);bodyLoad()"><span>Review
-                Mode</span>
+            <button type="button" onclick="ValidateUser()">Submit</button>
+            <button type="button" onclick="displayRegister()">Register</button>
         </div>
 
-        <h4>Choose the Sections and continue:</h4>
-        <div id="sectionDiv"
-            style="display: flex; justify-content: space-evenly;">
+        <div id='RegisterDiv' style="display: none;">
+            <form id='RegisterForm' name='RegisterForm' enctype="multipart/form-data">
+                <h4>Upload Profile Picture</h4>
+                <img id="preview" src="#" alt="your image" style="display:none" /> </br>
+                <input id='profile' type="file" name="profilePic" accept="image/png, image/jpeg"
+                    onchange="previewFile()"></br>
+                <h4>User name</h4>
+                <input id='username' type="text" name="username"> </br></br>
+                <h4>password</h4>
+                <input id='password' type="password" name="password"></br></br>
+                <button type="button" onclick="AddUser()">Register</button>
+            </form>
         </div>
-    </br>
-        <div id="container" style="display: inline-block;" class="container innercontainer">
-        </div>
-        <input type="button" id="Prev_img" class="btn btn-warning navbar-btn  buttonR" value="Prev"
-            onclick="myFunctionMinus()">
-        <input type="button" id="Next_img" class="btn btn-warning navbar-btn  buttonR" value="Next"
-            onclick="myFunctionPlus()">
-        <input type="button" value="Add bookmark" id='btnBookmark' class="btn btn-danger" onclick="AddBookmark()">
-        <input type="button" value="Remove bookmark" id='btnRemoveBookmark' class="btn btn-warning"
-            onclick="removeBookmark()">
 
-        <div id="BookmarkBtns">
-        </div>
-        <div id='QuestionNav' style="display: block; position: absolute ; bottom: 0px;">
-        </div>
-    </div>
 
-</body>
-<script src="services/ValidationService"></script>
-<script src="services/QuestionService"></script>
-<script src="services/StudentResponseService"></script>
-<script src="services/TestService"></script>
-<script src="services/LoadQuiz"></script>
-<script src="services/BookmarkService"></script>
+
+        <div id='QuizDiv' style="display: none;">
+            <img id="DispProPic">
+            <h2>Quiz</h2>
+            <span id='DispUserId'></span>
+
+            <div id='ExamModes' align='center'>
+                <input type="radio" name='modes' id="ExamMode" checked='true'
+                    onclick="TestService.setTestMode(1);bodyLoad()"><span>Exam Mode</span> &nbsp;
+                <input type="radio" name='modes' id="ReviewMode"
+                    onclick="TestService.setTestMode(2);bodyLoad()"><span>Review
+                    Mode</span>
+            </div>
+
+            <h4>Choose the Sections and continue:</h4>
+            <div id="sectionDiv" style="display: flex; justify-content: space-evenly;">
+            </div>
+            </br>
+            <div id="container" style="display: inline-block;" class="container innercontainer">
+            </div>
+            <input type="button" id="Prev_img" class="btn btn-warning navbar-btn  buttonR" value="Prev"
+                onclick="myFunctionMinus()">
+            <input type="button" id="Next_img" class="btn btn-warning navbar-btn  buttonR" value="Next"
+                onclick="myFunctionPlus()">
+            <input type="button" value="Add bookmark" id='btnBookmark' class="btn btn-danger" onclick="AddBookmark()">
+            <input type="button" value="Remove bookmark" id='btnRemoveBookmark' class="btn btn-warning"
+                onclick="removeBookmark()">
+
+            <div id="BookmarkBtns">
+            </div>
+            <div id='QuestionNav' style="display: block; position: absolute ; bottom: 0px;">
+            </div>
+        </div>
+
+    </body>
+    <script src="services/ValidationService"></script>
+    <script src="services/QuestionService"></script>
+    <script src="services/StudentResponseService"></script>
+    <script src="services/TestService"></script>
+    <script src="services/LoadQuiz"></script>
+    <script src="services/BookmarkService"></script>
 
 </html>

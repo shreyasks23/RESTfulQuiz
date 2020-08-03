@@ -2,7 +2,7 @@ var TestService = (function () {
     var testMode = 1;
     var MasterQuestion;
     MasterQuestion = [];
-    var requestObj = new XMLHttpRequest();    
+    var requestObj = new XMLHttpRequest();
     requestObj.open("GET", "MasterQuestions.txt", false);
     requestObj.send();
     MasterQuestion = JSON.parse(requestObj.responseText);
@@ -24,8 +24,8 @@ var TestService = (function () {
     }
     //Setting Mode
     function setTestModeFunc(mode) {
-        if (mode > 0 && mode < 3)//Limitting the test mode to only two modes "Test Mode" and "Review Mode"
-            testMode = mode;            
+        if (mode > 0 && mode < 3) //Limitting the test mode to only two modes "Test Mode" and "Review Mode"
+            testMode = mode;
     }
 
     function getTestModeFunc() {

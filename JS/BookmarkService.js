@@ -1,13 +1,13 @@
 var BookmarkService = (function () {
     var bookmarkArray = [];
+
     function setBookmarkFunc(questionId) {
 
-        
+
         if (bookmarkArray[questionId] == false || bookmarkArray[questionId] == null || bookmarkArray[questionId] == undefined) {
-            bookmarkArray[questionId] = true;            
-        }
-        else {
-            alert("bookmark added already");            
+            bookmarkArray[questionId] = true;
+        } else {
+            alert("bookmark added already");
         }
     }
 

@@ -5,14 +5,29 @@ var QuestionService = (function () {
     var currentSectionQuestions = [];
     var currentSectionQuestionID = 0;
     MasterQuestion = [];
-    var requestObj = new XMLHttpRequest();
 
-    requestObj.open("GET", "resources/MasterQuestions", false);
-    requestObj.send();
-    MasterQuestion = JSON.parse(requestObj.responseText);
-    for (i = 0; i < MasterQuestion.length; i++) {
-        MasterQuestion[i].MQIndex = i;
-    }
+    var p = new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: "resources/MasterQuestions",
+            success: (res) => {
+                resolve(res);
+            },
+            error: (err) => {
+                reject(err);
+            }
+        })   
+    })
+   
+    p.then((res) => {        
+        MasterQuestion = JSON.parse(res);
+        for (i = 0; i < MasterQuestion.length; i++) {
+            MasterQuestion[i].MQIndex = i;
+        }
+    }).catch((err) => {
+        console.log(err);
+    })
+    
 
     function setCurrentSectionFunc(Section) {
         currentSection = Section;

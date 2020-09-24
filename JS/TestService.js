@@ -1,11 +1,27 @@
 var TestService = (function () {
     var testMode = 1;
-    var MasterQuestion;
-    MasterQuestion = [];
-    var requestObj = new XMLHttpRequest();
-    requestObj.open("GET", "MasterQuestions.txt", false);
-    requestObj.send();
-    MasterQuestion = JSON.parse(requestObj.responseText);
+    var MasterQuestion = [];     
+
+    var promise = new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: 'resources/MasterQuestions',
+            success: (res) => {
+                resolve(res);
+            },
+            error: (err) => {
+                reject(err);
+            }
+        })
+    });
+
+    promise.then((res) => {
+        MasterQuestion = JSON.parse(res);
+    }).catch((err) => {
+        console.log(err);
+    })
+
+   
 
     function getAllSectionNamesFunc() {
         var sectionNames = [];
